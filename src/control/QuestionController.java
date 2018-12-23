@@ -6,11 +6,11 @@ public class QuestionController {
 
     public QuestionController() {} //default constructor
 
-    int getCurrentQuestion() {
+    public int getCurrentQuestion() {
         return currentQuestion;
     }
 
-    void increaseCurrentQuestion() {
+    public void increaseCurrentQuestion() {
         currentQuestion++;
     }
 }
