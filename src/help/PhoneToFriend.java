@@ -7,6 +7,6 @@ public class PhoneToFriend extends Helper {
     public String getHelp(String qst, QuestionController controller) {
         String[] split = getSplit(qst);
 
-        return split[controller.getCurrentQuestion() < 5 ? 6 : getRand(MIN, MAX)];
+        return split[getRand(MIN, MAX)];
     }
 }
