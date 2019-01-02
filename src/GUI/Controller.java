@@ -8,6 +8,10 @@ import help.PhoneToFriend;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
+
+import java.util.LinkedList;
 import java.util.Optional;
 
 
@@ -89,21 +93,41 @@ public class Controller {
     public void AudButton(ActionEvent event) {
         aud.setDisable(true);
         helper = new AskTheAudience();
-       // helper.getHelp();
-
+        LinkedList<Integer> percent = (LinkedList<Integer>)helper.getHelp(questionController);
+        AudienceBarChart chart = new AudienceBarChart();
+        chart.display(percent);
     }
 
     public void TeleButton(ActionEvent event) {
         tel.setDisable(true);
         helper = new PhoneToFriend();
-        // helper.getHelp();
+        String friendAnswer = (String)helper.getHelp(questionController);
+        ButtonType ok = new ButtonType("OK", ButtonBar.ButtonData.OK_DONE);
+        alert = new Alert(Alert.AlertType.NONE, friendAnswer, ok);
+        alert.setTitle("Telephone Help");
+        Optional<ButtonType> result = alert.showAndWait();
     }
 
     public void FiftyButton(ActionEvent event) {
         fifty.setDisable(true);
         helper = new Fifty();
-        // helper.getHelp();
-
+        LinkedList<Integer> wrong = (LinkedList<Integer>)helper.getHelp(questionController);
+        for (int i : wrong) {
+            switch(i) {
+                case 1:
+                    A.setDisable(true);
+                    break;
+                case 2:
+                    B.setDisable(true);
+                    break;
+                case 3:
+                    C.setDisable(true);
+                    break;
+                case 4:
+                    D.setDisable(true);
+                    break;
+            }
+        }
     }
 
     private void setButtonsDisabled(boolean value) {

@@ -2,27 +2,30 @@ package help;
 
 import control.QuestionController;
 
+import java.util.LinkedList;
+import java.util.List;
+
+
 public class Fifty extends Helper {
 
     @Override
-    public String getHelp(String qst, QuestionController controller) {
-        String[] split = getSplit(qst);
-        int i;
-        for(i = 2; i < 6; i++) {
-            if(split[i].equals(split[6])) {
-                break;
-            }
+    public List<Integer> getHelp(QuestionController controller) {
+        List<Integer> wrong = new LinkedList<>();
+        if(!controller.getAnswer1().equals(controller.getCorrectAnswer())) {
+            wrong.add(1);
         }
-
-        int rand = getRand(MIN, MAX);
-        if(rand == i) {
-            if( rand == 5) {
-                rand--;
-            } else {
-                rand++;
-            }
+        if(!controller.getAnswer2().equals(controller.getCorrectAnswer())) {
+            wrong.add(2);
         }
+        if(!controller.getAnswer3().equals(controller.getCorrectAnswer())) {
+            wrong.add(3);
+        }
+        if(!controller.getAnswer4().equals(controller.getCorrectAnswer())) {
+            wrong.add(4);
+        }
+        int chosenOne = getRand(0, 3);
+        wrong.remove(chosenOne);
 
-        return split[i] + split[rand];
+        return wrong;
     }
 }
