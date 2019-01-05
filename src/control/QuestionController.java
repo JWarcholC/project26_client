@@ -5,7 +5,7 @@ import org.json.JSONObject;
 
 public class QuestionController {
     public static final int QUESTIONS = 12;
-    public static final String url = "127.0.0.1:8080/api/milion/question/{";
+    public static final String url = "127.0.0.1:8080/api/milion/question/";
     private static int questionNumber = 1;
 
     private String question;
@@ -23,7 +23,7 @@ public class QuestionController {
         return questionNumber;
     }
 
-    public void increaseCurrentQuestion() {
+    public void increaseCurrentQuestion() throws IOException {
         questionNumber++;
         setFields();
     }
@@ -44,9 +44,9 @@ public class QuestionController {
 
 
     // create new JSON object from URL and then set actually value fields
-    private void setFields() {
-        JSONObject jsonObject = new JSONObject("{\"QUESTION\": \"ala\"; \"ANSWER1\": \"a\"; \"ANSWER2\": \"b\"; \"ANSWER3\": \"c\"; \"ANSWER4\": \"d\"; \"CORRECT_ANSWER\": \"b\"}");
-        // jsonObject = JSONReader.readJsonFromUrl(url + questionNumber + "}");
+    private void setFields() throws IOException {
+        JSONObject jsonObject = new JSONObject("{\"QUESTION\": \"ala\"; \"ANSWER1\": \"a\"; \"ANSWER2\": \"b\"; \"ANSWER3\": \"c\"; \"ANSWER4\": \"d\"; \"CORRECT_ANSWER\": \"d\"}");
+      //  JSONObject jsonObject = JSONReader.readJsonFromUrl(url + questionNumber);
         question = jsonObject.getString("QUESTION");
         answer1 = jsonObject.getString("ANSWER1");
         answer2 = jsonObject.getString("ANSWER3");

@@ -11,13 +11,13 @@ import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 
+import java.io.IOException;
 import java.util.LinkedList;
 import java.util.Optional;
 
 
 public class Controller {
 
-    //TODO: call getHelp() with every Button fields
     private QuestionController questionController = new QuestionController();
     private Helper helper;
     private Alert alert; // to show dialog
@@ -53,6 +53,9 @@ public class Controller {
     @FXML
     private Button end;
 
+    @FXML
+    private Label questionNumber;
+
     public Controller() throws Exception {}
 
     public void startGame(ActionEvent event) {
@@ -74,19 +77,19 @@ public class Controller {
         }
     }
 
-    public void AnswerA(ActionEvent event) {
+    public void AnswerA(ActionEvent event) throws IOException {
         checkQuestion(A);
     }
 
-    public void AnswerB(ActionEvent event) {
+    public void AnswerB(ActionEvent event) throws IOException {
         checkQuestion(B);
     }
 
-    public void AnswerC(ActionEvent event) {
+    public void AnswerC(ActionEvent event) throws IOException {
         checkQuestion(C);
     }
 
-    public void AnswerD(ActionEvent event) {
+    public void AnswerD(ActionEvent event) throws IOException {
         checkQuestion(D);
     }
 
@@ -130,6 +133,21 @@ public class Controller {
         }
     }
 
+    private void winnerController() {
+        if(questionController.getQuestionNumber() > QuestionController.QUESTIONS) {
+            ButtonType endGame = new ButtonType("Finish", ButtonBar.ButtonData.FINISH);
+            alert = new Alert(Alert.AlertType.INFORMATION, "You win $1 000 000!!! :D ", endGame);
+            alert.setTitle("\t\tWINNER");
+            Optional<ButtonType> result = alert.showAndWait();
+
+            setDefaultsButtonsAndTextValue(); // clear text fields
+            setButtonsDisabled(true); // dafault buttons and textfield behaviour
+            questionController.defaultQuestionNumber(); // change question' number to default (=1)
+        } else {
+            questionNumber.setText(questionController.getQuestionNumber() + "/12");
+        }
+    }
+
     private void setButtonsDisabled(boolean value) {
         A.setDisable(value);
         B.setDisable(value);
@@ -148,6 +166,7 @@ public class Controller {
         B.setText(questionController.getAnswer2());
         C.setText(questionController.getAnswer3());
         D.setText(questionController.getAnswer4());
+        questionNumber.setText(questionController.getQuestionNumber() + "/12");
     }
 
     private void setDefaultsButtonsAndTextValue() {
@@ -156,9 +175,10 @@ public class Controller {
         B.setText("");
         C.setText("");
         D.setText("");
+        questionNumber.setText("");
     }
 
-    private void checkQuestion(Button button) { // check if answer is correct
+    private void checkQuestion(Button button) throws IOException { // check if answer is correct
 
         ButtonType ok = new ButtonType("OK", ButtonBar.ButtonData.OK_DONE);
         if(button.getText().equals(questionController.getCorrectAnswer())) {
@@ -166,7 +186,8 @@ public class Controller {
             alert.setTitle("Congratulations!");
             Optional<ButtonType> result = alert.showAndWait();
 
-            questionController.increaseCurrentQuestion(); //go to next question
+            questionController.increaseCurrentQuestion(); //increase game level
+            winnerController(); //check if you win
         } else {
             alert = new Alert(Alert.AlertType.ERROR, "Good answer is: " + questionController.getCorrectAnswer() + "\nYou lose!", ok);
             alert.setTitle("Looooser!");
