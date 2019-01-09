@@ -21,7 +21,7 @@ public class Controller {
     private QuestionController questionController = new QuestionController();
     private Helper helper;
     private Alert alert; // to show dialog
-
+    private boolean ifFiftyFifty = false;
 
     @FXML
     private Button start;
@@ -58,7 +58,8 @@ public class Controller {
 
     public Controller() throws Exception {}
 
-    public void startGame(ActionEvent event) {
+    public void startGame(ActionEvent event) throws IOException {
+        questionController.defaultQuestionNumber(); // change question' number to default (=1)
         setButtonsDisabled(false);
         setButtonsAndTextValue();
     }
@@ -131,9 +132,10 @@ public class Controller {
                     break;
             }
         }
+        ifFiftyFifty = true;
     }
 
-    private void winnerController() {
+    private void winnerController(){
         if(questionController.getQuestionNumber() > QuestionController.QUESTIONS) {
             ButtonType endGame = new ButtonType("Finish", ButtonBar.ButtonData.FINISH);
             alert = new Alert(Alert.AlertType.INFORMATION, "You win $1 000 000!!! :D ", endGame);
@@ -142,7 +144,6 @@ public class Controller {
 
             setDefaultsButtonsAndTextValue(); // clear text fields
             setButtonsDisabled(true); // dafault buttons and textfield behaviour
-            questionController.defaultQuestionNumber(); // change question' number to default (=1)
         } else {
             questionNumber.setText(questionController.getQuestionNumber() + "/12");
         }
@@ -181,13 +182,21 @@ public class Controller {
     private void checkQuestion(Button button) throws IOException { // check if answer is correct
 
         ButtonType ok = new ButtonType("OK", ButtonBar.ButtonData.OK_DONE);
+
         if(button.getText().equals(questionController.getCorrectAnswer())) {
-            alert = new Alert(Alert.AlertType.CONFIRMATION, "Good answer is: " + questionController.getCorrectAnswer(), ok);
+            alert = new Alert(Alert.AlertType.INFORMATION, "Good answer is: " + questionController.getCorrectAnswer(), ok);
             alert.setTitle("Congratulations!");
             Optional<ButtonType> result = alert.showAndWait();
 
             questionController.increaseCurrentQuestion(); //increase game level
             winnerController(); //check if you win
+
+            if(ifFiftyFifty) {
+                setAllButtonsEnabled();
+                ifFiftyFifty = false;
+            }
+
+            setButtonsAndTextValue();
         } else {
             alert = new Alert(Alert.AlertType.ERROR, "Good answer is: " + questionController.getCorrectAnswer() + "\nYou lose!", ok);
             alert.setTitle("Looooser!");
@@ -195,8 +204,14 @@ public class Controller {
 
             setDefaultsButtonsAndTextValue(); // clear text fields
             setButtonsDisabled(true); // dafault buttons and textfield behaviour
-            questionController.defaultQuestionNumber(); // change question' number to default (=1)
         }
+    }
+
+    private void setAllButtonsEnabled() {
+        A.setDisable(false);
+        B.setDisable(false);
+        C.setDisable(false);
+        D.setDisable(false);
     }
 
 }
