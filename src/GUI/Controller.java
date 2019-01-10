@@ -144,8 +144,6 @@ public class Controller {
 
             setDefaultsButtonsAndTextValue(); // clear text fields
             setButtonsDisabled(true); // dafault buttons and textfield behaviour
-        } else {
-            questionNumber.setText(questionController.getQuestionNumber() + "/12");
         }
     }
 

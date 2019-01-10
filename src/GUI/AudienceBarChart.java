@@ -27,10 +27,10 @@ public class AudienceBarChart {
         yAxis.setLabel("Percent");
 
         XYChart.Series series1 = new XYChart.Series();
-        series1.getData().add(new XYChart.Data(aName, percent.get(0)));
-        series1.getData().add(new XYChart.Data(bName, percent.get(2)));
-        series1.getData().add(new XYChart.Data(cName, percent.get(1)));
-        series1.getData().add(new XYChart.Data(dName, percent.get(3)));
+        series1.getData().add(new XYChart.Data(aName, percent.get(0))); // a
+        series1.getData().add(new XYChart.Data(bName, percent.get(1))); // b
+        series1.getData().add(new XYChart.Data(cName, percent.get(2))); // c
+        series1.getData().add(new XYChart.Data(dName, percent.get(3))); // d
 
 
         try {
