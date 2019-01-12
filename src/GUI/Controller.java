@@ -135,8 +135,8 @@ public class Controller {
         ifFiftyFifty = true;
     }
 
-    private void winnerController(){
-        if(questionController.getQuestionNumber() > QuestionController.QUESTIONS) {
+    private boolean winnerController(){
+        if(questionController.getQuestionNumber() == QuestionController.QUESTIONS) {
             ButtonType endGame = new ButtonType("Finish", ButtonBar.ButtonData.FINISH);
             alert = new Alert(Alert.AlertType.INFORMATION, "You win $1 000 000!!! :D ", endGame);
             alert.setTitle("\t\tWINNER");
@@ -144,7 +144,9 @@ public class Controller {
 
             setDefaultsButtonsAndTextValue(); // clear text fields
             setButtonsDisabled(true); // dafault buttons and textfield behaviour
+            return true;
         }
+        return false;
     }
 
     private void setButtonsDisabled(boolean value) {
@@ -186,15 +188,16 @@ public class Controller {
             alert.setTitle("Congratulations!");
             Optional<ButtonType> result = alert.showAndWait();
 
-            questionController.increaseCurrentQuestion(); //increase game level
-            winnerController(); //check if you win
-
-            if(ifFiftyFifty) {
-                setAllButtonsEnabled();
-                ifFiftyFifty = false;
+            if(!winnerController()) { //check if you not win
+                questionController.increaseCurrentQuestion(); //increase game level
+                setButtonsAndTextValue();
+                if (ifFiftyFifty) {
+                    setAllButtonsEnabled();
+                    ifFiftyFifty = false;
+                }
             }
 
-            setButtonsAndTextValue();
+
         } else {
             alert = new Alert(Alert.AlertType.ERROR, "Good answer is: " + questionController.getCorrectAnswer() + "\nYou lose!", ok);
             alert.setTitle("Looooser!");
