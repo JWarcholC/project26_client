@@ -11,10 +11,10 @@
    <Button fx:id="aud" disable="true" layoutX="534.0" layoutY="25.0" mnemonicParsing="false" onAction="#AudButton" prefHeight="56.0" prefWidth="95.0" text="Audience" />
    <Button fx:id="fifty" disable="true" layoutX="317.0" layoutY="25.0" mnemonicParsing="false" onAction="#FiftyButton" prefHeight="56.0" prefWidth="62.0" text="50/50" />
    <TextField fx:id="question" alignment="CENTER" disable="true" editable="false" layoutX="87.0" layoutY="128.0" prefHeight="80.0" prefWidth="542.0" />
-   <Button fx:id="A" disable="true" layoutX="87.0" layoutY="249.0" mnemonicParsing="false" onAction="#AnswerA" prefHeight="46.0" prefWidth="253.0" text="A: TAK" />
-   <Button fx:id="C" disable="true" layoutX="87.0" layoutY="324.0" mnemonicParsing="false" onAction="#AnswerC" prefHeight="46.0" prefWidth="253.0" text="C: TAK" />
-   <Button fx:id="B" disable="true" layoutX="379.0" layoutY="249.0" mnemonicParsing="false" onAction="#AnswerB" prefHeight="46.0" prefWidth="253.0" text="B: NIE" />
-   <Button fx:id="D" disable="true" layoutX="379.0" layoutY="324.0" mnemonicParsing="false" onAction="#AnswerD" prefHeight="46.0" prefWidth="253.0" text="D: KEBS" />
+   <Button fx:id="A" disable="true" layoutX="87.0" layoutY="249.0" mnemonicParsing="false" onAction="#AnswerA" prefHeight="46.0" prefWidth="253.0" text="A: " />
+   <Button fx:id="C" disable="true" layoutX="87.0" layoutY="324.0" mnemonicParsing="false" onAction="#AnswerC" prefHeight="46.0" prefWidth="253.0" text="C: " />
+   <Button fx:id="B" disable="true" layoutX="379.0" layoutY="249.0" mnemonicParsing="false" onAction="#AnswerB" prefHeight="46.0" prefWidth="253.0" text="B: " />
+   <Button fx:id="D" disable="true" layoutX="379.0" layoutY="324.0" mnemonicParsing="false" onAction="#AnswerD" prefHeight="46.0" prefWidth="253.0" text="D: " />
    <Button fx:id="end" layoutX="90.0" layoutY="25.0" mnemonicParsing="false" onAction="#endGame" prefHeight="56.0" prefWidth="88.0" text="End Game" />
    <Button fx:id="start" alignment="TOP_CENTER" contentDisplay="TOP" mnemonicParsing="false" onAction="#startGame" text="START" />
       <Label fx:id="questionNumber" layoutX="521.0" layoutY="89.0" prefHeight="34.0" prefWidth="106.0" />

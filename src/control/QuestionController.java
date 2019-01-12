@@ -49,10 +49,10 @@ public class QuestionController {
        // JSONObject jsonObject = new JSONObject("{\"QUESTION\": \"ala\"; \"ANSWER1\": \"a\"; \"ANSWER2\": \"b\"; \"ANSWER3\": \"c\"; \"ANSWER4\": \"d\"; \"CORRECT_ANSWER\": \"d\"}");
        JSONObject jsonObject = JSONReader.readJsonFromUrl(url + questionNumber);
         question = jsonObject.getString("question");
-        answer1 = jsonObject.getString("answer1");
-        answer2 = jsonObject.getString("answer2");
-        answer3 = jsonObject.getString("answer3");
-        answer4 = jsonObject.getString("answer4");
+        answer1 = "A: " + jsonObject.getString("answer1");
+        answer2 = "B: " +jsonObject.getString("answer2");
+        answer3 = "C: " +jsonObject.getString("answer3");
+        answer4 = "D: " +jsonObject.getString("answer4");
         int correctAnswerNo = jsonObject.getInt("correctAnswer");
         correctAnswer = setCorrectAnswerField(correctAnswerNo);
     }
