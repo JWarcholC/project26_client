@@ -5,7 +5,7 @@ import org.json.JSONObject;
 
 public class QuestionController {
     public static final int QUESTIONS = 12;
-    public static final String url = "http://127.0.0.1:8080/api/milion/question/";
+    public static final String url = "http://127.0.0.1:8080/api/milion/question/"; // server address
     private int questionNumber = 1;
 
     private String question;
@@ -22,12 +22,12 @@ public class QuestionController {
     }
 
     public void increaseCurrentQuestion() throws IOException {
-        questionNumber++;
-        setFields();
+        questionNumber++; // go to next level
+        setFields(); // get new question from server
     }
 
     public void defaultQuestionNumber() throws IOException {
-        questionNumber = 1;
+        questionNumber = 1; // return first question
         setFields();
     }
 
@@ -46,18 +46,18 @@ public class QuestionController {
 
     // create new JSON object from URL and then set actually value fields
     private void setFields() throws IOException {
-       // JSONObject jsonObject = new JSONObject("{\"QUESTION\": \"ala\"; \"ANSWER1\": \"a\"; \"ANSWER2\": \"b\"; \"ANSWER3\": \"c\"; \"ANSWER4\": \"d\"; \"CORRECT_ANSWER\": \"d\"}");
+
        JSONObject jsonObject = JSONReader.readJsonFromUrl(url + questionNumber);
         question = jsonObject.getString("question");
         answer1 = "A: " + jsonObject.getString("answer1");
-        answer2 = "B: " +jsonObject.getString("answer2");
-        answer3 = "C: " +jsonObject.getString("answer3");
-        answer4 = "D: " +jsonObject.getString("answer4");
+        answer2 = "B: " + jsonObject.getString("answer2");
+        answer3 = "C: " + jsonObject.getString("answer3");
+        answer4 = "D: " + jsonObject.getString("answer4");
         int correctAnswerNo = jsonObject.getInt("correctAnswer");
         correctAnswer = setCorrectAnswerField(correctAnswerNo);
     }
 
-    private String setCorrectAnswerField(int no) {
+    private String setCorrectAnswerField(int no) { // set correct answer fields owing to number of correct
         String ans = null;
         switch(no) {
             case 1:

@@ -13,10 +13,10 @@ import java.io.IOException;
 import java.util.LinkedList;
 
 public class AudienceBarChart {
-    final static String aName = "a";
-    final static String bName = "b";
-    final static String cName = "c";
-    final static String dName = "d";
+    final static String aName = "A";
+    final static String bName = "B";
+    final static String cName = "C";
+    final static String dName = "D";
 
 
     public void display(LinkedList<Integer> percent) {

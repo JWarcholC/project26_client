@@ -10,7 +10,7 @@ public class Fifty extends Helper {
 
     @Override
     public List<Integer> getHelp(QuestionController controller) {
-        List<Integer> wrong = new LinkedList<>();
+        List<Integer> wrong = new LinkedList<>(); // list of wrong answers buttons
         if(!controller.getAnswer1().equals(controller.getCorrectAnswer())) {
             wrong.add(1);
         }
@@ -23,7 +23,7 @@ public class Fifty extends Helper {
         if(!controller.getAnswer4().equals(controller.getCorrectAnswer())) {
             wrong.add(4);
         }
-        int chosenOne = getRand(0, 3);
+        int chosenOne = getRand(0, 3); // rand which buttons will be disabled
         wrong.remove(chosenOne);
 
         return wrong;

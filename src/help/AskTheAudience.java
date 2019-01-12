@@ -11,10 +11,10 @@ public class AskTheAudience extends Helper {
     @Override
     public List<Integer> getHelp(QuestionController controller) {
         int percentOfAudience = 100;
-        int correctPercent = getRand(50,percentOfAudience + 1);
+        int correctPercent = getRand(50,percentOfAudience + 1); // correct answer must have always more than 50%
         percentOfAudience -= correctPercent;
         List<Integer> percent = new LinkedList<>();
-        if(!controller.getAnswer1().equals(controller.getCorrectAnswer())) {
+        if(!controller.getAnswer1().equals(controller.getCorrectAnswer())) { // others have rand value( in sum ofc 100%)
             int ansPercent = getRand(0, percentOfAudience + 1);
             percentOfAudience -= ansPercent;
             percent.add(ansPercent);

@@ -56,7 +56,7 @@ public class Controller {
     @FXML
     private Label questionNumber;
 
-    public Controller() throws Exception {}
+    public Controller() {}
 
     public void startGame(ActionEvent event) throws IOException {
         questionController.defaultQuestionNumber(); // change question' number to default (=1)
@@ -69,7 +69,7 @@ public class Controller {
         ButtonType yes = new ButtonType("Yes", ButtonBar.ButtonData.YES);
         ButtonType no = new ButtonType("No", ButtonBar.ButtonData.NO);
         alert = new Alert(Alert.AlertType.WARNING, "Are you sure to want to exit?",no, yes);
-        alert.setTitle("Exit Dialog");
+        alert.setTitle("\t\tExit Dialog");
 
         Optional<ButtonType> result = alert.showAndWait();
 
@@ -94,7 +94,7 @@ public class Controller {
         checkQuestion(D);
     }
 
-    public void AudButton(ActionEvent event) {
+    public void AudButton(ActionEvent event) { // ask the audience
         aud.setDisable(true);
         helper = new AskTheAudience();
         LinkedList<Integer> percent = (LinkedList<Integer>)helper.getHelp(questionController);
@@ -102,17 +102,17 @@ public class Controller {
         chart.display(percent);
     }
 
-    public void TeleButton(ActionEvent event) {
+    public void TeleButton(ActionEvent event) { // phone to friend
         tel.setDisable(true);
         helper = new PhoneToFriend();
         String friendAnswer = (String)helper.getHelp(questionController);
         ButtonType ok = new ButtonType("OK", ButtonBar.ButtonData.OK_DONE);
         alert = new Alert(Alert.AlertType.NONE, friendAnswer, ok);
-        alert.setTitle("Telephone Help");
-        Optional<ButtonType> result = alert.showAndWait();
+        alert.setTitle("\t\tTelephone Help");
+        alert.showAndWait();
     }
 
-    public void FiftyButton(ActionEvent event) {
+    public void FiftyButton(ActionEvent event) { // fifty fifty
         fifty.setDisable(true);
         helper = new Fifty();
         LinkedList<Integer> wrong = (LinkedList<Integer>)helper.getHelp(questionController);
@@ -135,12 +135,12 @@ public class Controller {
         ifFiftyFifty = true;
     }
 
-    private boolean winnerController(){
+    private boolean winnerController(){ // chceck if you didn't ask the last questions
         if(questionController.getQuestionNumber() == QuestionController.QUESTIONS) {
             ButtonType endGame = new ButtonType("Finish", ButtonBar.ButtonData.FINISH);
-            alert = new Alert(Alert.AlertType.INFORMATION, "You win $1 000 000!!! :D ", endGame);
+            alert = new Alert(Alert.AlertType.INFORMATION, "You win $1 000 000!!! :D ", endGame); // you win <3
             alert.setTitle("\t\tWINNER");
-            Optional<ButtonType> result = alert.showAndWait();
+            alert.showAndWait();
 
             setDefaultsButtonsAndTextValue(); // clear text fields
             setButtonsDisabled(true); // dafault buttons and textfield behaviour
@@ -185,8 +185,8 @@ public class Controller {
 
         if(button.getText().equals(questionController.getCorrectAnswer())) {
             alert = new Alert(Alert.AlertType.INFORMATION, "Good answer is: " + questionController.getCorrectAnswer(), ok);
-            alert.setTitle("Congratulations!");
-            Optional<ButtonType> result = alert.showAndWait();
+            alert.setTitle("\t\tCongratulations!");
+            alert.showAndWait();
 
             if(!winnerController()) { //check if you not win
                 questionController.increaseCurrentQuestion(); //increase game level
@@ -200,15 +200,15 @@ public class Controller {
 
         } else {
             alert = new Alert(Alert.AlertType.ERROR, "Good answer is: " + questionController.getCorrectAnswer() + "\nYou lose!", ok);
-            alert.setTitle("Looooser!");
-            Optional<ButtonType> result = alert.showAndWait();
+            alert.setTitle("\t\tLooooser!");
+            alert.showAndWait();
 
             setDefaultsButtonsAndTextValue(); // clear text fields
             setButtonsDisabled(true); // dafault buttons and textfield behaviour
         }
     }
 
-    private void setAllButtonsEnabled() {
+    private void setAllButtonsEnabled() { // enable all buttons after usage of 50/50
         A.setDisable(false);
         B.setDisable(false);
         C.setDisable(false);
